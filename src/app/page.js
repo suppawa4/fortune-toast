@@ -1,19 +1,9 @@
 import Image from "next/image";
+import { getTarot } from "./services/TarotService";
 
 export default async function Home() {
-  const response = await fetch(
-    "http://localhost:3000/api/tarot",
-    //   {
-    //   cache: "no-store",
-    //   next: { revalidate: 0 }
-    // }
-  );
+  const card = await getTarot();
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  const card = await response.json();
   console.log(card);
 
   return (
