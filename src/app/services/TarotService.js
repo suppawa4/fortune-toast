@@ -13,7 +13,8 @@ const cardDesc = async (card) => {
   const response = await result.response;
   return response.text();
 };
-const getTarot = async () => {
+
+const getCard = async () => {
   let card = {};
   let allTarots = {};
   const initCard = async () => {
@@ -43,7 +44,8 @@ const getTarot = async () => {
     desc: cardDescription.replace(/\n/g, "").trim(),
     img: getCardImg(img),
   };
+
   return responseData;
 };
 
-export { cardDesc, getTarot };
+export { cardDesc, getCard };
