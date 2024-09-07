@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Loading from "@/app/components/loading";
+import axios from "axios";
 
 export default function Home() {
   const [card, setCard] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const BASE_API = process.env.NEXT_PUBLIC_LOCAL_URL;
 
   const initCard = async () => {
     const cachedCard = localStorage.getItem("tarotCard");
@@ -13,8 +15,8 @@ export default function Home() {
       setIsLoading(false);
     } else {
       try {
-        const response = await fetch("/api/tarot");
-        const newCard = await response.json();
+        const response = await axios.get(`${BASE_API}/api/tarot`);
+        const newCard = response.data;
 
         localStorage.setItem("tarotCard", JSON.stringify(newCard));
         setCard(newCard);
